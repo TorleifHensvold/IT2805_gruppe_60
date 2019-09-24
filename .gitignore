@@ -1,0 +1,6 @@
+# each line specifies a pattern on files to be ignored.
+# see https://git-scm.com/docs/gitignore for documentation
+
+
+# No need to keep the .idea folder synchronized with git
+.idea
