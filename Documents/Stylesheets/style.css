@@ -1,16 +1,16 @@
 header
-	{
-		text-align: center;
-	}
+{
+	text-align: center;
+}
 
 body 
 {
 	margin: auto;
-	padding: 15px;
+	padding: 20px;
 	max-width: 50%;
 	font-size: 16px;
 	font-family: Arial, Helvetica, sans-serif;
-	background-color: lightgoldenrodyellow;
+	background-color: #EEEEEE;
 	border-width: 3px;
 	border-radius: 15px;
 	border-style: solid;
@@ -20,5 +20,19 @@ p, li
 {
 	font-size: 16px;
 	font-family: Arial, Helvetica, sans-serif;
-	color: #252525;
+	line-height: 150%;
+	color: #000000;
+}
+
+img
+{
+	width: 100%;
+}
+
+td 
+{
+	border-color: #000000;
+	border-width: 1px;
+	border-style: solid;
+	padding: 5px;
 }
