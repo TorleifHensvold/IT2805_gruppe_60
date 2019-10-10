@@ -1,4 +1,3 @@
-
 function focusWindow(content, width, height) {
     let node = document.createElement("div");
     let background = document.createElement('div');
@@ -32,9 +31,3 @@ function focusWindow(content, width, height) {
 function unFocusWindow(window) {
     document.body.removeChild(window);
 }
-
-let testButton = document.getElementById("testButton");
-
-testButton.addEventListener("click", function() {
-    focusWindow(testButton, 500, 500)
-});
