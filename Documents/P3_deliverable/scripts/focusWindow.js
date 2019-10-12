@@ -1,33 +1,24 @@
-function focusWindow(content, width, height) {
-    let node = document.createElement("div");
+let focusNode = document.createElement("div");
+
+function focusWindow(content) {
+    focusNode = document.createElement("div");
     let background = document.createElement('div');
     let window = document.createElement("div");
 
-    background.style.position = "fixed";
-    background.style.width = "100%";
-    background.style.height = "100%";
-    background.style.left = "0px";
-    background.style.top = "0px";
-    background.style.backgroundColor = "rgba(100, 100, 100, 0.5)";    
+    background.className = "underlay";
     background.addEventListener("click", function() {
-        unFocusWindow(node);
+        unFocusWindow();
     });
     
-    window.style.position = "fixed";
-    window.style.left = "50%";
-    window.style.top = "50%";
-    window.style.marginTop = (-height/2).toString() + "px";
-    window.style.marginLeft = (-width/2).toString() + "px";
-    window.style.width = width.toString() + "px";
-    window.style.height = height.toString() + "px";
     window.className = "window";
     
-    node.appendChild(background);
+    focusNode.appendChild(background);
     window.appendChild(content)
-    node.appendChild(window);
-    document.body.appendChild(node);
+    focusNode.appendChild(window);
+    document.body.appendChild(focusNode);
 }
 
-function unFocusWindow(window) {
-    document.body.removeChild(window);
+function unFocusWindow() {
+    focusNode.parentNode.removeChild(focusNode);
+    focusNode.innerHTML = "";
 }
