@@ -7,4 +7,9 @@ body
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 	background-size: cover;
+
+	/*
+	Just here to act as background in case no browser support for background image.
+	*/
+	background-color: antiquewhite;
 }
