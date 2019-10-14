@@ -104,6 +104,10 @@ function createWindowDiv(menuItem) {
     addButton.addEventListener("click", function() {
         addItemToCart(menuItem);
         unFocusWindow(windowDiv);
+
+        let responseDiv = document.getElementById("response");
+        responseDiv.visible = "visible";
+        focusWindow(responseDiv, false);
     });
     detailText.innerHTML = "Type: " + menuItem.type + "<br> Price:" + menuItem.price + "<br> Weight: " + menuItem.weight;
     detailText.id = "detailText";
@@ -130,3 +134,6 @@ function addItemToCart(item) {
 }
 
 generateMenuItems();
+document.getElementById("backBtn").addEventListener("click", function() {
+    unFocusWindow(false);
+});

@@ -38,6 +38,17 @@ button
 	text-align: center;
 }
 
+button:hover {
+	animation-name: buttonTransition;
+	animation-duration: 250ms;
+	background-color: white;
+}
+
+@keyframes buttonTransition {
+	from {background-color: #27EF8F;}
+	to {background-color: white;}
+}
+
 img
 {
 	width: 100%;
@@ -83,6 +94,13 @@ td
 	border-radius: 15px;
 	border-style: solid;
 	background-color: #EEEEEE;
+	animation-name: windowFade;
+	animation-duration: 500ms;
+}
+
+@keyframes windowFade {
+	from {width: 0%; height: 0px;}
+	to {width: 75%; height: 550px;}
 }
 
 .window img {
