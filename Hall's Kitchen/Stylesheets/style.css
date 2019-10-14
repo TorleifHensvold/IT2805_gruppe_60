@@ -1,2 +1,10 @@
 /* TODO: Add styling */
 
+
+body
+{
+	background-image: url("../images/graydon.jpg");
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
