@@ -51,6 +51,8 @@ td
 	padding: 5px;
 }
 
+
+/* rules related to menu.html mostly */
 .menuContainer {
 	display: flex;
 	flex-direction: row;

@@ -4,8 +4,8 @@ const menuItems = {
         key: "hamburger",
         name: "Hamburger",
         type: "dinner",
-        image_small: "images/menu/hamburger.jpg",
-        image_large: "",
+        image_small: "images/menu/hamburger-small.jpg",
+        image_large: "images/menu/hamburger-large.jpg",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrudexercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
         price: "100",
         weight: "200g"
@@ -15,7 +15,7 @@ const menuItems = {
         name: "Pizza",
         type: "dinner",
         image_small: "images/menu/pizza.jpg",
-        image_large: "",
+        image_large: "images/menu/pizza.jpg",
         description: "This is a description about Pizza",
         price: "100",
         weight: "200g"
@@ -25,7 +25,7 @@ const menuItems = {
         name: "Steak",
         type: "dinner",
         image_small: "images/menu/steak.jpg",
-        image_large: "",
+        image_large: "images/menu/steak.jpg",
         description: "This is a description about Steak",
         price: "100",
         weight: "200g"
@@ -34,8 +34,8 @@ const menuItems = {
         key: "noodles",
         name: "Noodles",
         type: "dinner",
-        image_small: "images/menu/noodles.jpg",
-        image_large: "",
+        image_small: "images/menu/noodles-small.jpg",
+        image_large: "images/menu/noodles-large.jpg",
         description: "This is a description about Noodles",
         price: "100",
         weight: "200g"
@@ -44,8 +44,8 @@ const menuItems = {
         key: "meatBalls",
         name: "Meat Balls",
         type: "dinner",
-        image_small: "images/menu/meatballs.jpg",
-        image_large: "",
+        image_small: "images/menu/meatballs-small.jpg",
+        image_large: "images/menu/meatballs-large.jpg",
         description: "This is a description about Meat Balls",
         price: "100",
         weight: "200g"
@@ -54,8 +54,8 @@ const menuItems = {
         key: "iceCream",
         name: "Ice Cream",
         type: "dessert",
-        image_small: "images/menu/ice_cream.jpg",
-        image_large: "",
+        image_small: "images/menu/ice_cream-small.jpg",
+        image_large: "images/menu/ice_cream-large.jpg",
         description: "This is a description about Ice cream",
         price: "50",
         weight: "50g"
@@ -99,7 +99,7 @@ function createWindowDiv(menuItem) {
     h2.innerText = menuItem.name;
     description.innerText = menuItem.description;
     img.alt = menuItem.name;
-    img.src = menuItem.image_small;
+    img.src = menuItem.image_large;
     addButton.innerText = "Add to Cart";
     addButton.addEventListener("click", function() {
         addItemToCart(menuItem);
