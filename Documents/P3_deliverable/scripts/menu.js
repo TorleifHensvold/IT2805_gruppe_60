@@ -153,10 +153,10 @@ function createWindowDiv(menuItem) {
     addButton.innerText = "Add to Cart";
     addButton.addEventListener("click", function() {
         addItemToCart(menuItem);
-        unFocusWindow(windowDiv);
+        unFocusWindow();
 
         let responseDiv = document.getElementById("response");
-        responseDiv.visible = "visible";
+        responseDiv.style.display = "block";
         focusWindow(responseDiv, false);
     });
     detailText.innerHTML = "Type: " + menuItem.type + "<br> Price:" + menuItem.price + "<br> Weight: " + menuItem.weight;

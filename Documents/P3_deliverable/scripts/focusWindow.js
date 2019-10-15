@@ -19,9 +19,9 @@ function focusWindow(content, deleteOnClose=true) {
 }
 
 function unFocusWindow(deleteOnClose) {
-    if (!deleteOnClose) {
+    if (deleteOnClose === false) {
         let content = document.getElementsByClassName("window")[0].childNodes[0];
-        content.visible = "hidden";
+        content.style.display = "none";
         document.body.appendChild(content);
     }
     focusNode.innerHTML = "";
