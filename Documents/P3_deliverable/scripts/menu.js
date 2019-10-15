@@ -14,8 +14,8 @@ const menuItems = {
         key: "pizza",
         name: "Pizza",
         type: "dinner",
-        image_small: "images/menu/pizza.jpg",
-        image_large: "images/menu/pizza.jpg",
+        image_small: "images/menu/pizza-small.jpg",
+        image_large: "images/menu/pizza-large.jpg",
         description: "This is a description about Pizza",
         price: "100",
         weight: "200g"
@@ -24,8 +24,8 @@ const menuItems = {
         key: "steak",
         name: "Steak",
         type: "dinner",
-        image_small: "images/menu/steak.jpg",
-        image_large: "images/menu/steak.jpg",
+        image_small: "images/menu/steak-small.jpg",
+        image_large: "images/menu/steak-large.jpg",
         description: "This is a description about Steak",
         price: "100",
         weight: "200g"
@@ -57,6 +57,56 @@ const menuItems = {
         image_small: "images/menu/ice_cream-small.jpg",
         image_large: "images/menu/ice_cream-large.jpg",
         description: "This is a description about Ice cream",
+        price: "50",
+        weight: "50g"
+    },
+    chocolateCake: {
+        key: "chocolateCake",
+        name: "Chocolate Cake",
+        type: "dessert",
+        image_small: "images/menu/chocolate_cake-small.jpg",
+        image_large: "images/menu/chocolate_cake-large.jpg",
+        description: "This is a description about Chocolate cake",
+        price: "50",
+        weight: "50g"
+    },
+    milkshake: {
+        key: "milkshake",
+        name: "Milkshake",
+        type: "dessert",
+        image_small: "images/menu/milkshake-small.jpg",
+        image_large: "images/menu/milkshake-large.jpg",
+        description: "This is a description about Milkshake",
+        price: "50",
+        weight: "50g"
+    },
+    springRolls: {
+        key: "springRolls",
+        name: "Spring Rolls",
+        type: "appetizer",
+        image_small: "images/menu/spring_rolls-small.jpg",
+        image_large: "images/menu/spring_rolls-large.jpg",
+        description: "This is a description about Spring Rolls",
+        price: "50",
+        weight: "50g"
+    },
+    frenchFries: {
+        key: "frenchFries",
+        name: "French Fries",
+        type: "appetizer",
+        image_small: "images/menu/french_fires-small.jpg",
+        image_large: "images/menu/french_fires-large.jpg",
+        description: "This is a description about French Fries",
+        price: "50",
+        weight: "50g"
+    },
+    chickenSoup: {
+        key: "chickenSoup",
+        name: "Chicken Soup",
+        type: "appetizer",
+        image_small: "images/menu/chicken_soup-small.jpg",
+        image_large: "images/menu/chicken_soup-large.jpg",
+        description: "This is a description about Chicken Soup",
         price: "50",
         weight: "50g"
     }
