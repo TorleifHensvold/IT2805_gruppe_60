@@ -1,13 +1,13 @@
 let focusNode = document.createElement("div");
 
-function focusWindow(content) {
+function focusWindow(content, deleteOnClose=true) {
     focusNode = document.createElement("div");
     let background = document.createElement('div');
     let window = document.createElement("div");
 
     background.className = "underlay";
     background.addEventListener("click", function() {
-        unFocusWindow();
+        unFocusWindow(deleteOnClose);
     });
     
     window.className = "window";
@@ -18,7 +18,12 @@ function focusWindow(content) {
     document.body.appendChild(focusNode);
 }
 
-function unFocusWindow() {
-    focusNode.parentNode.removeChild(focusNode);
+function unFocusWindow(deleteOnClose) {
+    if (deleteOnClose === false) {
+        let content = document.getElementsByClassName("window")[0].childNodes[0];
+        content.style.display = "none";
+        document.body.appendChild(content);
+    }
     focusNode.innerHTML = "";
+    focusNode.parentNode.removeChild(focusNode);
 }
