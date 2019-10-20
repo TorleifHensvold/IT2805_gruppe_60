@@ -26,11 +26,14 @@
 			</div>
 
 			<div id="inquiry_container">
-				Email address:<span class="asterix">*</span><br>
-				<input type="text" id="inquiry_email" class="inquiry_input" required><br>
-
-				Inquiry:<span class="asterix">*</span><br>
-				<textarea rows="12" id="inquiry_content" class="inquiry_input" required></textarea><br>
+				<label>
+					Email address:<span class="asterix">*</span><br>
+					<input type="text" id="inquiry_email" class="inquiry_input" required><br>
+				</label>
+				<label>
+					Inquiry:<span class="asterix">*</span><br>
+					<textarea rows="12" id="inquiry_content" class="inquiry_input" required></textarea><br>
+				</label>
 
 				<button type="button" onclick="submit_inquiry(document.getElementById('inquiry_email'), document.getElementById('inquiry_content'), document.getElementById('alert_div'));">Send inquiry</button>
 			</div>
