@@ -112,7 +112,7 @@ td
 }
 
 @keyframes windowFade {
-	from {width: 0%; height: 0px;}
+	from {width: 0; height: 0;}
 	to {width: 75%; height: 550px;}
 }
 
@@ -135,8 +135,8 @@ td
 	position: fixed;
 	width: 100%;
 	height: 100%;
-	left: 0px;
-	top: 0px;
+	left: 0;
+	top: 0;
     background-color: rgba(100, 100, 100, 0.5);
 }
 
