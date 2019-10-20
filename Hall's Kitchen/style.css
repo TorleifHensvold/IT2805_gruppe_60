@@ -16,7 +16,7 @@ html
 
 
 /* when changing the body, just put in another div or something then, so we don't lose it*/
-body
+div#content
 {
     margin: auto;
     padding: 20px;
