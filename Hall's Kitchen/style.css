@@ -5,6 +5,7 @@ html
 {
 	background-image: url("images/gordon.jpg");
 	background-size: cover;
+	background-position: center;
 	background-attachment: fixed;
 	background-repeat: no-repeat;
 
@@ -197,4 +198,36 @@ textarea {
 
 #alert_div {
 	text-align: center;
+}
+
+
+.cartImageDiv
+{
+	border: 1px solid red;
+	width: 10%;
+	padding: 10%;
+	box-sizing: border-box;
+	position: relative;
+	overflow: hidden;
+}
+
+.cartImage
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: auto;
+	/*overflow: hidden;*/
+}
+
+.cartItems
+{
+	width: 100%;
+	min-height: 50px;
+}
+
+.cartItem
+{
+	width: 95%;
 }
