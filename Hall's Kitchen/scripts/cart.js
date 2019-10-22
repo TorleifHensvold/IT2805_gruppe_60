@@ -46,28 +46,49 @@ function createItemDiv (itemName, number)
 
 	//imageDiv.appendChild(image);
 	imageDiv.className = "cartImageDiv";
-	imageDiv.style.backgroundImage = "url('" + menuJSON[itemName]['image_small'] + "')"
-	imageDiv.style.backgroundPosition = "center"
+	imageDiv.style.backgroundImage = "url('" + menuJSON[itemName]['image_small'] + "')";
+	imageDiv.style.backgroundPosition = "center";
 	itemDiv.appendChild(imageDiv);
-	itemDiv.appendChild(choiceDiv)
-	itemDiv.appendChild(priceDiv)
-	if (menuJSON[itemName]["type"] === "dinner")
+	itemDiv.appendChild(choiceDiv);
+	itemDiv.appendChild(priceDiv);
+	let filter = menuJSON[itemName]["type"];
+
+
+	if (filter === "dinner")
 	{
-		let parentDiv = document.getElementById("dinners");
-		parentDiv.appendChild(itemDiv);
+		appendChildDiv(itemDiv, "dinners");
+		//let parentDiv = document.getElementById("dinners");
+		//parentDiv.appendChild(itemDiv);
 	}
+	else if (filter === "appetizer")
+	{
+		appendChildDiv(itemDiv, "appetizers");
+	}
+	else if (filter === "dessert")
+	{
+		appendChildDiv(itemDiv, "desserts");
+	}
+	console.log(itemName + ": " + number)
+}
+
+function appendChildDiv(childDiv, filterText)
+{
+	let parentDiv = document.getElementById(filterText);
+	parentDiv.appendChild(childDiv);
 }
 
 function getMenuJSON()
 {
-	var request = new XMLHttpRequest();
+	let request = new XMLHttpRequest();
 	request.open("GET", "JSON_files/menuItems.json", false);
 	request.send(null);
-	var data = request.responseText;
+	let data = request.responseText;
+	/*
 	console.log(data);
 	console.log(typeof data);
 	console.log(typeof JSON.parse(data));
 	console.log(JSON.parse(data));
+	*/
 	return JSON.parse(data);
 
 }

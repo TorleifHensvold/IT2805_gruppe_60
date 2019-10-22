@@ -124,10 +124,10 @@ function addItemToCart(item) {
 	localStorage.setItem("cart", JSON.stringify(cart));
 }
 
-localStorage.clear()
+localStorage.clear();
 
 
-addItemToCart(menuItems.chickenSoup)
-addItemToCart(menuItems.hamburger)
-addItemToCart(menuItems.chickenSoup)
-
+addItemToCart(menuItems.chickenSoup);
+addItemToCart(menuItems.hamburger);
+addItemToCart(menuItems.chickenSoup);
+addItemToCart(menuItems.pizza);
