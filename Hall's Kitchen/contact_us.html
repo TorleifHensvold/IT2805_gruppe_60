@@ -9,30 +9,34 @@
 	</head>
 
 	<body>
-		<header>
-			<h1>Contact us</h1>
-		</header>
+		<div id="navBar"></div>
+		<div id="content">
+			<header>
+				<h1>Contact us</h1>
+			</header>
 
-		<p>
-			If you have any questions about lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sed facilisis velit, in dictum ligula. Ut accumsan, feel free to send us an email by <a href="mailto:thisisnotarealemail@graydon.com">clicking here</a>, or by filling in the form below.
-		</p>
+			<p>
+				If you have any questions about lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sed facilisis velit, in dictum ligula. Ut accumsan, feel free to send us an email by <a href="mailto:thisisnotarealemail@graydon.com">clicking here</a>, or by filling in the form below.
+			</p>
 
-		<div id="alert_div" class="alert">
-			<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-			Inquiry submitted!
+			<div id="alert_div" class="alert">
+				<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+				Inquiry submitted!
+			</div>
+
+			<div id="inquiry_container">
+				Email address:<span class="asterix">*</span><br>
+				<input type="text" id="inquiry_email" class="inquiry_input" required><br>
+
+				Inquiry:<span class="asterix">*</span><br>
+				<textarea rows="12" id="inquiry_content" class="inquiry_input" required></textarea><br>
+
+				<button type="button" onclick="submit_inquiry(document.getElementById('inquiry_email'), document.getElementById('inquiry_content'), document.getElementById('alert_div'));">Send inquiry</button>
+			</div>
 		</div>
 
-		<div id="inquiry_container">
-			Email address:<span class="asterix">*</span><br>
-			<input type="text" id="inquiry_email" class="inquiry_input" required><br>
-
-			Inquiry:<span class="asterix">*</span><br>
-			<textarea rows="12" id="inquiry_content" class="inquiry_input" required></textarea><br>
-
-			<button type="button" onclick="submit_inquiry(document.getElementById('inquiry_email'), document.getElementById('inquiry_content'), document.getElementById('alert_div'));">Send inquiry</button>
-		</div>
-		
 		<script src="scripts/contact.js"></script>
+		<script src="scripts/addNavBar.js"></script>
 	</body>
 
 </html>
