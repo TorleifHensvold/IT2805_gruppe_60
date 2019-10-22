@@ -3,11 +3,10 @@
 /* The body and the html is to be changed*/
 body
 {
-	background-image: url("images/gordon.jpg");
-	background-size: cover;
-	background-position: center;
+	background-image: url("images/graydon.jpg");
 	background-attachment: fixed;
 	background-repeat: no-repeat;
+	background-size: cover;
 
 	/*
 	Just here to act as background in case no browser support for background image.
@@ -17,8 +16,7 @@ body
 
 
 /* when changing the body, just put in another div or something then, so we don't lose it*/
-div#content
-{
+#content {
     margin: auto;
     padding: 20px;
     max-width: 75%;
@@ -30,6 +28,45 @@ div#content
     background-color: rgba(240, 240, 240, 0.9);
 
 }
+
+
+#navBar {
+	margin: auto;
+	padding: 20px;
+    max-width: 100%;
+	font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-width: 3px;
+    border-radius: 15px;
+    border-style: solid;
+    background-color: rgba(240, 240, 240, 0.9);
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+}
+
+#navBar a, #navBar button {
+	font-size: 25px;
+	width: 75%;
+}
+
+@media only screen and (max-width: 850px) {
+	#navBar {
+		display: flex;
+		flex-direction: column;
+		flex-wrap: nowrap;
+		justify-content: space-around;
+		align-items: center;
+	}
+
+	#navBar a, #navBar button {
+		font-size: 18px;
+		width: 100%;
+	}
+}
+
 
 header
 {
