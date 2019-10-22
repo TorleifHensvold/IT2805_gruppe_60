@@ -71,6 +71,7 @@ function createItemDiv (itemName, number)
 	console.log(itemName + ": " + number)
 }
 
+
 function appendChildDiv(childDiv, filterText)
 {
 	let parentDiv = document.getElementById(filterText);
