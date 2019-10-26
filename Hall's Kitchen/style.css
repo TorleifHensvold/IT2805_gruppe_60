@@ -18,7 +18,9 @@ body
 /* when changing the body, just put in another div or something then, so we don't lose it*/
 #content {
     margin: auto;
-    padding: 20px;
+	padding: 20px;
+	position: relative;
+	top: 75px;
     max-width: 75%;
     font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
@@ -26,15 +28,18 @@ body
     border-radius: 15px;
     border-style: solid;
     background-color: rgba(240, 240, 240, 0.9);
-
+	z-index: 0;
 }
 
 
 #navBar {
+	position: fixed;
+	top: 0;
 	margin: auto;
-	padding: 20px;
+	padding: 10px;
+	width: 95%;
     max-width: 100%;
-	font-size: 30px;
+	font-size: 22px;
     font-family: Arial, Helvetica, sans-serif;
     border-width: 3px;
     border-radius: 15px;
@@ -45,25 +50,23 @@ body
 	flex-wrap: nowrap;
 	justify-content: space-around;
 	align-items: center;
+	z-index: 1;
 }
 
 #navBar a, #navBar button {
-	font-size: 25px;
+	font-size: 22px;
+	padding: 0;
 	width: 75%;
+	height: 50px;
 }
 
 @media only screen and (max-width: 850px) {
-	#navBar {
-		display: flex;
-		flex-direction: column;
-		flex-wrap: nowrap;
-		justify-content: space-around;
-		align-items: center;
-	}
-
 	#navBar a, #navBar button {
-		font-size: 18px;
+		font-size: 16px;
 		width: 100%;
+		padding: 0;
+		height: 50px;
+		margin: 0;
 	}
 }
 
@@ -93,11 +96,18 @@ button:hover {
 	animation-name: buttonTransition;
 	animation-duration: 250ms;
 	background-color: white;
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
 @keyframes buttonTransition {
-	from {background-color: #27EF8F;}
-	to {background-color: white;}
+	from {
+		background-color: #27EF8F;
+		box-shadow: 0 0 0 0 rgba(0,0,0,0.24), 0 0 0 0 rgba(0,0,0,0.19);
+	}
+	to {
+		background-color: white; 
+		box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+	}
 }
 
 img
@@ -139,6 +149,7 @@ td
 	top: 50%;
 	width: 75%;
 	height: 550px;
+	z-index: 3;
 	transform: translate(-50%, -50%);
 	padding: 20px;
 	border-width: 3px;
@@ -175,6 +186,7 @@ td
 	height: 100%;
 	left: 0px;
 	top: 0px;
+	z-index: 2;
     background-color: rgba(100, 100, 100, 0.5);   
 }
 
