@@ -4,7 +4,14 @@
 	<meta charset="UTF-8">
 	<title>Hall's Kitchen</title>
 	<link rel="stylesheet" href="style.css">
+
+	<!--
+		The order of the scripts loaded with the keyword "defer" is important, as the first script fully runs before the
+		next script is allowed to run, even though they all get downloaded to the browser at the same time.
+		If any scripts use "async" instead they won't wait for the order of the others at all.
+	-->
 	<script src="scripts/addNavBar.js" defer></script>
+	<script src="scripts/menuItems.js" defer></script>
 	<script src="scripts/cartTestingScript.js" defer></script>
 	<script src="scripts/cart.js" defer></script>
 </head>

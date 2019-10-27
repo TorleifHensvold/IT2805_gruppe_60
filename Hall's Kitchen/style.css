@@ -17,7 +17,7 @@ body
 
 /* when changing the body, just put in another div or something then, so we don't lose it*/
 #content {
-    margin: auto;
+	margin: 10px auto 0;
     padding: 20px;
     max-width: 75%;
     font-size: 18px;
@@ -238,25 +238,34 @@ textarea {
 }
 
 
+/*
+	The following is mostly used for cart.html and cart.js
+	If you need to use it for something else try to figure out
+	a way to genericise it and refactor the files using it to the new name
+ */
+
 .cartImageDiv
 {
-	border: 1px solid red;
+	border: 1px solid black;
+	border-radius: 5px;
 	width: 10%;
+	min-width: 100px;
+	min-height: 100px;
 	padding: 10%;
 	box-sizing: border-box;
 	position: relative;
 	overflow: hidden;
+	display: inline-block;
 }
 
-.cartImage
+/*.cartImage
 {
 	position: absolute;
 	top: 0;
 	left: 0;
 	height: 100%;
 	width: auto;
-	/*overflow: hidden;*/
-}
+}*/
 
 .cartItems
 {
@@ -267,4 +276,53 @@ textarea {
 .cartItem
 {
 	width: 95%;
+	margin: auto;
 }
+
+.itemDiv
+{
+	margin: 10px 0;
+	padding: 10px;
+	border: 2px black;
+	border-radius: 10px;
+	background: rgba(220, 240, 220, 0.9);
+	position: relative;
+}
+
+.cartChoiceDiv
+{
+	display: inline-block;
+	position: relative;
+	margin: auto 20px;
+	/*
+	float: left;
+	 */
+	top: -10%;
+	width: 60%;
+}
+
+.minusButton
+{
+	height: 40px;
+	width: 40px;
+	margin: auto 5px;
+}
+
+.numberfield
+{
+	position: relative;
+	top: -10px;
+	width: 40px;
+	height: 40px;
+}
+
+.plusButton
+{
+	height: 40px;
+	width: 40px;
+	margin: auto 5px;
+}
+
+/*
+	End of cart.html and cart.js specific styling.
+ */

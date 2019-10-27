@@ -8,7 +8,7 @@ const pages = [
 
 const navBar = document.getElementById("navBar")
 
-for (page of pages) {
+for (let page of pages) {
     let link = document.createElement("a");
     let button = document.createElement("button");
 

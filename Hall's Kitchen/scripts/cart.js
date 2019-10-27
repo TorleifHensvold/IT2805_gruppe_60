@@ -3,85 +3,144 @@
 //console.log(cart)
 //console.log("logged cart")
 
-const menuJSON = getMenuJSON()
+const dev = 1;
+//const menuJSON = getMenu();
+const menuJSON = menuItems;
+console.log(menuJSON);
+console.log(typeof menuJSON);
 
 
 function addCartItemsToHTML ()
 {
-	console.log("Starting addCartItemsToHTML")
+	console.log('Starting addCartItemsToHTML');
 	let storage = localStorage;
 	if (storage.length === 0)
 	{
-		console.log("no cart found")
-		return
+		console.log('no cart found');
+		return;
 	}
-	else if (storage["cart"] != null)
+	else if (storage['cart'] != null)
 	{
-		let cart = storage["cart"]
-		let JSONcart = JSON.parse(cart)
+		let cart = storage['cart'];
+		let JSONcart = JSON.parse(cart);
 		for (let thing in JSONcart)
 		{
-			createItemDiv(thing, JSONcart[thing])
+			createItemDiv(thing, JSONcart[thing]);
 			//console.log(thing + " : " + JSONcart[thing])
 		}
 	}
-	console.log("addCartItemsToHTML done")
+	console.log('addCartItemsToHTML done');
 }
 
 function createItemDiv (itemName, number)
 {
 	// Initializing the variables needed
-	let itemDiv = document.createElement('div')
-	let imageDiv = document.createElement('div')
-	let choiceDiv = document.createElement('div')
-	let priceDiv = document.createElement('div')
-	//let image = document.createElement('img')
+	let itemDiv = document.createElement('div');
+	let imageDiv = document.createElement('div');
+	let choiceDiv = document.createElement('div');
+	let priceDiv = document.createElement('div');
 
-	// Setting the image
 	/*
-	image.src = menuJSON[itemName]["image_small"];
-	image.width = "180px";
-	image.className = "cartImage";
-	*/
-
-	//imageDiv.appendChild(image);
-	imageDiv.className = "cartImageDiv";
-	imageDiv.style.backgroundImage = "url('" + menuJSON[itemName]['image_small'] + "')";
-	imageDiv.style.backgroundPosition = "center";
+		Creating the image div and adding it to the itemDiv.
+	 */
+	imageDiv.className = 'cartImageDiv';
+	imageDiv.style.backgroundImage = 'url(\'' +
+		menuJSON[itemName]['image_small'] + '\')';
+	imageDiv.style.backgroundPosition = 'center';
+	imageDiv.style.backgroundSize = 'cover';
+	imageDiv.style.backgroundRepeat = 'no-repeat';
 	itemDiv.appendChild(imageDiv);
+
+	/*
+		Creating the choiceDiv for setting the number of each item
+	 */
+	choiceDiv.className = 'cartChoiceDiv';
+	let textfield = document.createElement('div');
+	textfield.className = "cartDescription";
+	let name = menuJSON[itemName]["name"];
+	let h2 = document.createElement('h2');
+	h2.style.margin = "2px";
+	h2.innerText = name;
+	textfield.appendChild(h2);
+	let p = document.createElement('p');
+	p.style.margin = "2px";
+	let description = menuJSON[itemName]["description"].substring(0,40);
+	p.innerText = description;
+	textfield.appendChild(p);
+	let minusButton = document.createElement('button');
+	minusButton.className = 'minusButton';
+	minusButton.innerText = "-";
+	let numberfield = document.createElement('input');
+	numberfield.value = number;
+	numberfield.className = "numberfield";
+	numberfield.id = "numberOf" + itemName;
+	//numberfield.disabled = "true";
+	let plusButton = document.createElement('button');
+	plusButton.className = 'plusButton';
+	plusButton.innerText = "+";
+	choiceDiv.appendChild(textfield);
+	choiceDiv.appendChild(minusButton);
+	choiceDiv.appendChild(numberfield);
+	choiceDiv.appendChild(plusButton);
 	itemDiv.appendChild(choiceDiv);
+
+	/*
+		Creating the priceDiv which will take into account the number of each
+		item and calculate a price to show.
+	 */
+	let priceText = document.createTextNode("Price:");
+	priceDiv.appendChild(priceText);
+	let priceField = document.createElement('input');
+	priceField.disabled = true;
+	priceField.id = "price" + itemName;
+	priceDiv.appendChild(priceField);
 	itemDiv.appendChild(priceDiv);
-	let filter = menuJSON[itemName]["type"];
 
 
-	if (filter === "dinner")
+	itemDiv.className = 'itemDiv';
+	let filter = menuJSON[itemName]['type'];
+	if (filter === 'dinner')
 	{
-		appendChildDiv(itemDiv, "dinners");
-		//let parentDiv = document.getElementById("dinners");
-		//parentDiv.appendChild(itemDiv);
+		appendChildDiv(itemDiv, 'dinners');
 	}
-	else if (filter === "appetizer")
+	else if (filter === 'appetizer')
 	{
-		appendChildDiv(itemDiv, "appetizers");
+		appendChildDiv(itemDiv, 'appetizers');
 	}
-	else if (filter === "dessert")
+	else if (filter === 'dessert')
 	{
-		appendChildDiv(itemDiv, "desserts");
+		appendChildDiv(itemDiv, 'desserts');
 	}
-	console.log(itemName + ": " + number)
+	console.log(itemName + ': ' + number);
 }
 
-
-function appendChildDiv(childDiv, filterText)
+/**
+ * Helper function to keep code succinct and non-repeating
+ * @param childDiv The div we want to append to a parentDiv
+ * @param parentID The ID the parent Element will have
+ */
+function appendChildDiv (childDiv, parentID)
 {
-	let parentDiv = document.getElementById(filterText);
+	let parentDiv = document.getElementById(parentID);
 	parentDiv.appendChild(childDiv);
 }
 
-function getMenuJSON()
+function getMenu ()
+{
+	let promise = loadScript('scripts/menuItems.js');
+	promise.then(() =>
+	{
+		console.log(menuItems);
+		return menuItems;
+	});
+	promise.catch(error => {console.log(error.message);});
+	//promise.then(() => {console.log(menuItems)})
+}
+
+function getMenuJSONDeprecated ()
 {
 	let request = new XMLHttpRequest();
-	request.open("GET", "JSON_files/menuItems.json", false);
+	request.open('GET', 'JSON_files/menuItems.json', false);
 	request.send(null);
 	let data = request.responseText;
 	/*
@@ -91,10 +150,50 @@ function getMenuJSON()
 	console.log(JSON.parse(data));
 	*/
 	return JSON.parse(data);
+}
 
+// DEPRECATED
+/**
+ * Uses Promises to allow script execution to be started up again once the
+ * requested script has loaded.
+ * @param source the relative filepath for the script we want to add and wait
+ *     for loading to finish before doing more.
+ * @return {Promise<any>} A Promise that will
+ */
+function loadScript (source)
+{
+	return new Promise(function (resolve, reject)
+	{
+		let script = document.createElement('script');
+		script.src = source;
+
+		script.onload = () => resolve(script);
+		script.onerror = () => reject(
+			new Error(`Script load error for ` + source));
+
+		document.head.append(script);
+	});
+}
+
+// DEPRECATED
+/**
+ * Function to turn on and off testing suite for development
+ */
+function testing ()
+{
+	if (dev == true)
+	{
+		let promise = loadScript('scripts/cartTestingScript.js');
+		promise.then(addCartItemsToHTML);
+	}
+	else
+	{
+		addCartItemsToHTML();
+	}
 }
 
 
-addCartItemsToHTML()
+testing();
+//addCartItemsToHTML();
 
 
