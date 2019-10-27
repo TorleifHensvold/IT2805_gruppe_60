@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Hall's Kitchen</title>
+	<link rel="stylesheet" href="style.css">
+
+	<!--
+		The order of the scripts loaded with the keyword "defer" is important, as the first script fully runs before the
+		next script is allowed to run, even though they all get downloaded to the browser at the same time.
+		If any scripts use "async" instead they won't wait for the order of the others at all.
+	-->
+	<script src="scripts/addNavBar.js" defer></script>
+	<script src="scripts/menuItems.js" defer></script>
+	<script src="scripts/cartTestingScript.js" defer></script>
+	<script src="scripts/cart.js" defer></script>
+</head>
+<body>
+<div id="navBar">
+	<noscript>
+		<h1 style="text-align: center">
+			JavaScript is off. Please turn it on for proper site functionality.
+		</h1>
+	</noscript>
+</div>
+<div id="content">
+	<div id="cartItems" class="cartItems">
+		<div id="appetizers" class="cartItem">
+
+		</div>
+		<div id="dinners" class = "cartItem">
+
+		</div>
+		<div id="desserts">
+
+		</div>
+		<div id="miscellaneous">
+
+		</div>
+
+	</div>
+	<div id="checkout">
+
+	</div>
+</div>
+</body>
+</html>

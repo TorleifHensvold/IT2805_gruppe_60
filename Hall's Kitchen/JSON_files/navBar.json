@@ -1,0 +1,29 @@
+{
+	"sites":
+	[
+		{
+			"relativePath": "../index.html",
+			"name": "Main Page"
+		}
+		,
+		{
+			"relativePath": "../menu.html",
+			"name": "Menu"
+		}
+		,
+		{
+			"relativePath": "../cart.html",
+			"name": "Cart"
+		}
+		,
+		{
+			"relativePath": "../contact_us.html",
+			"name": "Contact us"
+		}
+		,
+		{
+			"relativePath": "../about_us.html",
+			"name": "About us"
+		}
+	]
+}

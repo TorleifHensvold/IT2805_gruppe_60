@@ -4,3 +4,4 @@
 
 # No need to keep the .idea folder synchronized with git
 .idea
+.git
