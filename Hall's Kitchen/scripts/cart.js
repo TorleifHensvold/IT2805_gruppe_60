@@ -49,7 +49,7 @@ function createItemDiv (itemName, number)
 	imageDiv.style.backgroundPosition = 'center';
 	imageDiv.style.backgroundSize = 'cover';
 	imageDiv.style.backgroundRepeat = 'no-repeat';
-	itemDiv.appendChild(imageDiv);
+
 
 	/*
 		Creating the choiceDiv for setting the number of each item
@@ -82,7 +82,7 @@ function createItemDiv (itemName, number)
 	choiceDiv.appendChild(minusButton);
 	choiceDiv.appendChild(numberfield);
 	choiceDiv.appendChild(plusButton);
-	itemDiv.appendChild(choiceDiv);
+
 
 	/*
 		Creating the priceDiv which will take into account the number of each
@@ -94,6 +94,12 @@ function createItemDiv (itemName, number)
 	priceField.disabled = true;
 	priceField.id = "price" + itemName;
 	priceDiv.appendChild(priceField);
+
+	/*
+		Appending all the children of itemDiv
+	 */
+	itemDiv.appendChild(imageDiv);
+	itemDiv.appendChild(choiceDiv);
 	itemDiv.appendChild(priceDiv);
 
 
