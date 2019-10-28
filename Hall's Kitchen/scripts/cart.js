@@ -6,6 +6,7 @@
 const dev = 1;
 //const menuJSON = getMenu();
 const menuJSON = menuItems;
+const priceIdArray = [];
 console.log(menuJSON);
 console.log(typeof menuJSON);
 
@@ -92,7 +93,9 @@ function createItemDiv (itemName, number)
 	priceDiv.appendChild(priceText);
 	let priceField = document.createElement('input');
 	priceField.disabled = true;
-	priceField.id = "price" + itemName;
+	let id = "price"+itemName;
+	priceIdArray.push(id);
+	priceField.id = id;
 	priceDiv.appendChild(priceField);
 
 	/*
@@ -131,6 +134,7 @@ function appendChildDiv (childDiv, parentID)
 	parentDiv.appendChild(childDiv);
 }
 
+//DEPRECATED
 function getMenu ()
 {
 	let promise = loadScript('scripts/menuItems.js');
@@ -143,6 +147,7 @@ function getMenu ()
 	//promise.then(() => {console.log(menuItems)})
 }
 
+//DEPRECATED
 function getMenuJSONDeprecated ()
 {
 	let request = new XMLHttpRequest();
@@ -181,25 +186,7 @@ function loadScript (source)
 	});
 }
 
-// DEPRECATED
-/**
- * Function to turn on and off testing suite for development
- */
-function testing ()
-{
-	if (dev == true)
-	{
-		let promise = loadScript('scripts/cartTestingScript.js');
-		promise.then(addCartItemsToHTML);
-	}
-	else
-	{
-		addCartItemsToHTML();
-	}
-}
 
-
-testing();
-//addCartItemsToHTML();
+addCartItemsToHTML();
 
 
