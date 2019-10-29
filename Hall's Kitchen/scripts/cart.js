@@ -93,7 +93,7 @@ function createItemDiv (itemName, number)
 		Creating the priceDiv which will take into account the number of each
 		item and calculate a price to show.
 	 */
-	let priceText = document.createTextNode('Price:');
+	let priceText = document.createTextNode('Price: ');
 	priceDiv.appendChild(priceText);
 	let priceField = document.createElement('input');
 	priceField.disabled = true;
@@ -162,6 +162,7 @@ function appendChildDiv (childDiv, parentID)
 function incrementNumberOfDish (numberID, dishKey, outputID)
 {
 	changeNumberOfDish(numberID, '+', dishKey, outputID);
+	addItemsToCart(dishKey, 1);
 }
 
 /**
@@ -173,6 +174,7 @@ function incrementNumberOfDish (numberID, dishKey, outputID)
 function decrementNumberOfDish (numberID, dishKey, outputID)
 {
 	changeNumberOfDish(numberID, '-', dishKey, outputID);
+	removeItemsFromCart(dishKey, 1);
 }
 
 /**
@@ -208,10 +210,10 @@ function changeNumberOfDish (numberID, direction, dishKey, outputID)
 }
 
 /**
- * TODO fill out documentation
- * @param numberID
- * @param dishKey
- * @param outputID
+ * Function to calculate the price for each dish based on how many of it there is
+ * @param numberID the ID of the numberbox we're to change
+ * @param dishKey the key name used in menuItems.js for the item
+ * @param outputID the "input" where we send the final price
  */
 function calculateItemPrice (numberID, dishKey, outputID)
 {
@@ -222,7 +224,35 @@ function calculateItemPrice (numberID, dishKey, outputID)
 	document.getElementById(outputID).value = price;
 }
 
+function getCartJSON ()
+{
+	let cartString = localStorage.getItem('cart');
+	let cartJSON = JSON.parse(cartString);
+	return cartJSON;
+}
 
+function addItemsToCart (itemKey, number)
+{
+	let cart = getCartJSON();
+	cart[itemKey] += number;
+	saveCartJSONtoLocalStorage(cart);
+}
+
+function removeItemsFromCart (itemKey, number)
+{
+	let cart = getCartJSON();
+	cart[itemKey] -= number;
+	if (cart[itemKey] < 1)
+	{
+		delete cart[itemKey];
+	}
+	saveCartJSONtoLocalStorage(cart);
+}
+
+function saveCartJSONtoLocalStorage (cartJSON)
+{
+	localStorage.setItem('cart', JSON.stringify(cartJSON));
+}
 
 addCartItemsToHTML();
 
