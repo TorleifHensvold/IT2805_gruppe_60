@@ -83,10 +83,7 @@ function createItemDiv (itemName, number)
 	plusButton.className = 'plusButton';
 	plusButton.innerText = '+';
 
-	plusButton.addEventListener('click',
-		() => {incrementNumberOfDish(numberfield.id);});
-	minusButton.addEventListener('click',
-		() => {decrementNumberOfDish(numberfield.id);});
+
 	choiceDiv.appendChild(textfield);
 	choiceDiv.appendChild(minusButton);
 	choiceDiv.appendChild(numberfield);
@@ -101,9 +98,9 @@ function createItemDiv (itemName, number)
 	priceDiv.appendChild(priceText);
 	let priceField = document.createElement('input');
 	priceField.disabled = true;
-	let id = 'price' + itemName;
-	priceIdArray.push(id);
-	priceField.id = id;
+	let priceFieldID = 'price' + itemName;
+	priceIdArray.push(priceFieldID);
+	priceField.id = priceFieldID;
 	priceDiv.appendChild(priceField);
 
 	/*
@@ -113,6 +110,17 @@ function createItemDiv (itemName, number)
 	itemDiv.appendChild(choiceDiv);
 	itemDiv.appendChild(priceDiv);
 
+
+	plusButton.addEventListener('click',
+		() =>
+		{
+			incrementNumberOfDish(numberfield.id, itemName, priceField.id);
+		});
+	minusButton.addEventListener('click',
+		() =>
+		{
+			decrementNumberOfDish(numberfield.id, itemName, priceField.id);
+		});
 
 	/*
 		Choosing where to append the item
@@ -132,6 +140,7 @@ function createItemDiv (itemName, number)
 		appendChildDiv(itemDiv, 'desserts');
 	}
 	console.log(itemName + ': ' + number);
+	calculateItemPrice(numberfield.id, itemName, priceField.id);
 }
 
 /**
@@ -148,27 +157,33 @@ function appendChildDiv (childDiv, parentID)
 /**
  * Helper function to keep code DRY, and ease overview.
  * @param numberID the ID of the HTML element containing the number
+ * @param dishKey the key to the JSON for the dish
+ * @param outputID the price field for calculating the price based on number
  */
-function incrementNumberOfDish (numberID)
+function incrementNumberOfDish (numberID, dishKey, outputID)
 {
-	changeNumberOfDish(numberID, '+');
+	changeNumberOfDish(numberID, '+', dishKey, outputID);
 }
 
 /**
  * Helper function to keep code DRY, and ease overview.
  * @param numberID the ID of the HTML element containing the number
+ * @param dishKey the key to the JSON for the dish
+ * @param outputID the price field for calculating the price based on number
  */
-function decrementNumberOfDish (numberID)
+function decrementNumberOfDish (numberID, dishKey, outputID)
 {
-	changeNumberOfDish(numberID, '-');
+	changeNumberOfDish(numberID, '-', dishKey, outputID);
 }
 
 /**
  * Helper function to keep code DRY, and ease overview.
  * @param numberID the ID of the HTML element containing the number
  * @param direction "+" or "-" for adding or subtracting 1 to/from number
+ * @param dishKey the key to the JSON for the dish
+ * @param outputID the price field for calculating the price based on number
  */
-function changeNumberOfDish (numberID, direction)
+function changeNumberOfDish (numberID, direction, dishKey, outputID)
 {
 	let numberBox = document.getElementById(numberID);
 	let value = numberBox.value;
@@ -178,14 +193,34 @@ function changeNumberOfDish (numberID, direction)
 	}
 	else if (direction === '-')
 	{
-		if (value === 1)
+		if (value == 1)
 		{
-			console.log("We need to delete the element")
-			// TODO: Implement that.
+			let itemDiv = numberBox.closest('.itemDiv');
+			itemDiv.parentNode.removeChild(itemDiv);
+			return;
 		}
-		value--;
+		else
+		{
+			value--;
+		}
 	}
 	numberBox.value = String(value);
+	calculateItemPrice(numberID, dishKey, outputID);
+}
+
+/**
+ * TODO fill out documentation
+ * @param numberID
+ * @param dishKey
+ * @param outputID
+ */
+function calculateItemPrice (numberID, dishKey, outputID)
+{
+	let numberbox = document.getElementById(numberID);
+	let value = numberbox.value;
+	let dish = menuJSON[dishKey];
+	let price = value * dish['price'];
+	document.getElementById(outputID).value = price;
 }
 
 //DEPRECATED
