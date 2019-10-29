@@ -95,6 +95,7 @@ function createItemDiv (itemName, number)
 	let priceFieldID = 'price' + itemName;
 	priceIdArray.push(priceFieldID);
 	priceField.id = priceFieldID;
+	priceField.value = 0;
 	priceDiv.appendChild(priceField);
 
 	/*
@@ -232,6 +233,7 @@ function removeSingleItemDiv (itemDiv, dishKey)
 	let priceIndex = priceIdArray.indexOf('price' + dishKey);
 	priceIdArray.splice(priceIndex, 1);
 	itemDiv.parentNode.removeChild(itemDiv);
+	calculateTotalPrice()
 }
 
 /**
@@ -248,6 +250,7 @@ function calculateItemPrice (numberID, dishKey, outputID)
 	let dish = menuJSON[dishKey];
 	let price = value * dish['price'];
 	document.getElementById(outputID).value = price;
+	calculateTotalPrice()
 }
 
 function getCartJSON ()
@@ -292,6 +295,16 @@ function setNumberOfItemsInCart (itemKey, number)
 function saveCartJSONtoLocalStorage (cartJSON)
 {
 	localStorage.setItem('cart', JSON.stringify(cartJSON));
+}
+
+function calculateTotalPrice()
+{
+	let price = 0;
+	for (let key of priceIdArray)
+	{
+		price += Number(document.getElementById(key).value);
+	}
+	document.getElementById("totalPrice").value = price;
 }
 
 addCartItemsToHTML();
