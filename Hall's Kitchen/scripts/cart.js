@@ -218,6 +218,7 @@ function setNumberOfDish (numberID, numberValue, dishKey, outputID)
 	let numberBox = document.getElementById(numberID);
 	if (numberValue == 0)
 	{
+		setNumberOfItemsInCart(dishKey, 0);
 		let itemDiv = numberBox.closest('.itemDiv');
 		itemDiv.parentNode.removeChild(itemDiv);
 	}
@@ -275,7 +276,14 @@ function removeItemsFromCart (itemKey, numberToRemove)
 function setNumberOfItemsInCart (itemKey, number)
 {
 	let cart = getCartJSON();
-	cart[itemKey] = number;
+	if (number <= 0)
+	{
+		delete cart[itemKey];
+	}
+	else
+	{
+		cart[itemKey] = number;
+	}
 	saveCartJSONtoLocalStorage(cart);
 }
 
