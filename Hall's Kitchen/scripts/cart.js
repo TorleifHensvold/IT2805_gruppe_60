@@ -57,29 +57,34 @@ function createItemDiv (itemName, number)
 	 */
 	choiceDiv.className = 'cartChoiceDiv';
 	let textfield = document.createElement('div');
-	textfield.className = "cartDescription";
-	let name = menuJSON[itemName]["name"];
+	textfield.className = 'cartDescription';
+	let name = menuJSON[itemName]['name'];
 	let h2 = document.createElement('h2');
-	h2.style.margin = "2px";
+	h2.style.margin = '2px';
 	h2.innerText = name;
 	textfield.appendChild(h2);
 	let p = document.createElement('p');
-	p.style.margin = "2px";
-	let description = menuJSON[itemName]["description"].substring(0,40);
+	p.style.margin = '2px';
+	let description = menuJSON[itemName]['description'].substring(0, 40);
 	p.innerText = description;
 	textfield.appendChild(p);
 	let minusButton = document.createElement('button');
 	minusButton.className = 'minusButton';
-	minusButton.innerText = "-";
+	minusButton.innerText = '-';
+
 	let numberfield = document.createElement('input');
 	numberfield.value = number;
-	numberfield.className = "numberfield";
-	numberfield.id = "numberOf" + itemName;
+	numberfield.className = 'numberfield';
+	numberfield.id = 'numberOf' + itemName;
 	//numberfield.disabled = "true";
 	let plusButton = document.createElement('button');
 	plusButton.className = 'plusButton';
-	plusButton.innerText = "+";
-	plusButton.addEventListener("click", () => {incrementNumberOfDish(numberfield.id)});
+	plusButton.innerText = '+';
+
+	plusButton.addEventListener('click',
+		() => {incrementNumberOfDish(numberfield.id);});
+	minusButton.addEventListener('click',
+		() => {decrementNumberOfDish(numberfield.id);});
 	choiceDiv.appendChild(textfield);
 	choiceDiv.appendChild(minusButton);
 	choiceDiv.appendChild(numberfield);
@@ -90,11 +95,11 @@ function createItemDiv (itemName, number)
 		Creating the priceDiv which will take into account the number of each
 		item and calculate a price to show.
 	 */
-	let priceText = document.createTextNode("Price:");
+	let priceText = document.createTextNode('Price:');
 	priceDiv.appendChild(priceText);
 	let priceField = document.createElement('input');
 	priceField.disabled = true;
-	let id = "price"+itemName;
+	let id = 'price' + itemName;
 	priceIdArray.push(id);
 	priceField.id = id;
 	priceDiv.appendChild(priceField);
@@ -144,10 +149,26 @@ function appendChildDiv (childDiv, parentID)
  */
 function incrementNumberOfDish (numberID)
 {
+	changeNumberOfDish(numberID, '+');
+}
+
+function decrementNumberOfDish (numberID)
+{
+	changeNumberOfDish(numberID, '-');
+}
+
+function changeNumberOfDish (numberID, direction)
+{
 	let numberBox = document.getElementById(numberID);
 	let value = numberBox.value;
-	console.log(value);
-	value++;
+	if (direction === '+')
+	{
+		value++;
+	}
+	else if (direction === '-')
+	{
+		value--;
+	}
 	numberBox.value = String(value);
 }
 
