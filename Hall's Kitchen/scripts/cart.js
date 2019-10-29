@@ -120,6 +120,11 @@ function createItemDiv (itemName, number)
 		{
 			decrementNumberOfDish(numberfield.id, itemName, priceField.id);
 		});
+	numberfield.addEventListener('change', () =>
+	{
+		setNumberOfDish(numberfield.id, numberfield.value, itemName,
+			priceField.id);
+	});
 
 	/*
 		Choosing where to append the item
@@ -191,26 +196,44 @@ function changeNumberOfDish (numberID, direction, dishKey, outputID)
 	if (direction === '+')
 	{
 		value++;
+		setNumberOfDish(numberID, value, dishKey, outputID);
 	}
 	else if (direction === '-')
 	{
 		if (value == 1)
 		{
-			let itemDiv = numberBox.closest('.itemDiv');
-			itemDiv.parentNode.removeChild(itemDiv);
-			return;
+			setNumberOfDish(numberID, 0, dishKey, outputID);
 		}
 		else
 		{
 			value--;
+			setNumberOfDish(numberID, value, dishKey, outputID);
 		}
 	}
-	numberBox.value = String(value);
-	calculateItemPrice(numberID, dishKey, outputID);
+
+}
+
+function setNumberOfDish (numberID, numberValue, dishKey, outputID)
+{
+	let numberBox = document.getElementById(numberID);
+	if (numberValue == 0)
+	{
+		let itemDiv = numberBox.closest('.itemDiv');
+		itemDiv.parentNode.removeChild(itemDiv);
+	}
+	else
+	{
+
+		numberBox.value = String(numberValue);
+		setNumberOfItemsInCart(dishKey, numberValue);
+		calculateItemPrice(numberID, dishKey, outputID);
+	}
+
 }
 
 /**
- * Function to calculate the price for each dish based on how many of it there is
+ * Function to calculate the price for each dish based on how many of it there
+ * is
  * @param numberID the ID of the numberbox we're to change
  * @param dishKey the key name used in menuItems.js for the item
  * @param outputID the "input" where we send the final price
@@ -231,21 +254,28 @@ function getCartJSON ()
 	return cartJSON;
 }
 
-function addItemsToCart (itemKey, number)
+function addItemsToCart (itemKey, numberToAdd)
 {
 	let cart = getCartJSON();
-	cart[itemKey] += number;
+	cart[itemKey] += numberToAdd;
 	saveCartJSONtoLocalStorage(cart);
 }
 
-function removeItemsFromCart (itemKey, number)
+function removeItemsFromCart (itemKey, numberToRemove)
 {
 	let cart = getCartJSON();
-	cart[itemKey] -= number;
+	cart[itemKey] -= numberToRemove;
 	if (cart[itemKey] < 1)
 	{
 		delete cart[itemKey];
 	}
+	saveCartJSONtoLocalStorage(cart);
+}
+
+function setNumberOfItemsInCart (itemKey, number)
+{
+	let cart = getCartJSON();
+	cart[itemKey] = number;
 	saveCartJSONtoLocalStorage(cart);
 }
 
