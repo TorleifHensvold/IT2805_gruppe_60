@@ -14,7 +14,6 @@ function addCartItemsToHTML ()
 	if (storage.length === 0)
 	{
 		console.log('no cart found');
-		return;
 	}
 	else if (storage['cart'] != null)
 	{
@@ -25,7 +24,6 @@ function addCartItemsToHTML ()
 			createItemDiv(thing, JSONcart[thing]);
 		}
 	}
-	console.log('addCartItemsToHTML done');
 }
 
 function createItemDiv (itemName, number)
@@ -121,6 +119,8 @@ function createItemDiv (itemName, number)
 		setNumberOfDish(numberfield.id, numberfield.value, itemName,
 			priceField.id);
 	});
+	let orderButton = document.getElementById("orderButton");
+	orderButton.addEventListener('click', clearItems);
 
 	/*
 		Choosing where to append the item
@@ -139,7 +139,6 @@ function createItemDiv (itemName, number)
 	{
 		appendChildDiv(itemDiv, 'desserts');
 	}
-	console.log(itemName + ': ' + number);
 	calculateItemPrice(numberfield.id, itemName, priceField.id);
 }
 
@@ -307,6 +306,17 @@ function calculateTotalPrice()
 	document.getElementById("totalPrice").value = price;
 }
 
+function clearItems()
+{
+	let cartJSON = getCartJSON();
+	for (item in cartJSON)
+	{
+		setNumberOfDish("numberOf"+item, 0, item, null)
+	}
+	document.getElementById("finishedOrder").style.visibility = "visible";
+}
+
 addCartItemsToHTML();
+
 
 

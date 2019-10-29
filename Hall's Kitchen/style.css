@@ -348,6 +348,11 @@ textarea {
 	transform: translate(-50%,0);
 }
 
+.confirmationMessage
+{
+	visibility: hidden;
+}
+
 /*
 	End of cart.html and cart.js specific styling.
  */
