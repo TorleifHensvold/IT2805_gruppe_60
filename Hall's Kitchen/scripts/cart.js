@@ -3,7 +3,6 @@
 //console.log(cart)
 //console.log("logged cart")
 
-const dev = 1;
 //const menuJSON = getMenu();
 const menuJSON = menuItems;
 const priceIdArray = [];
