@@ -216,7 +216,7 @@ function changeNumberOfDish (numberID, direction, dishKey, outputID)
 function setNumberOfDish (numberID, numberValue, dishKey, outputID)
 {
 	let numberBox = document.getElementById(numberID);
-	if (numberValue == 0)
+	if (numberValue <= 0)
 	{
 		setNumberOfItemsInCart(dishKey, 0);
 		let itemDiv = numberBox.closest('.itemDiv');
