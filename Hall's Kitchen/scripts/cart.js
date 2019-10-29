@@ -6,13 +6,10 @@
 //const menuJSON = getMenu();
 const menuJSON = menuItems;
 const priceIdArray = [];
-console.log(menuJSON);
-console.log(typeof menuJSON);
 
 
 function addCartItemsToHTML ()
 {
-	console.log('Starting addCartItemsToHTML');
 	let storage = localStorage;
 	if (storage.length === 0)
 	{
@@ -26,7 +23,6 @@ function addCartItemsToHTML ()
 		for (let thing in JSONcart)
 		{
 			createItemDiv(thing, JSONcart[thing]);
-			//console.log(thing + " : " + JSONcart[thing])
 		}
 	}
 	console.log('addCartItemsToHTML done');
@@ -76,7 +72,6 @@ function createItemDiv (itemName, number)
 	numberfield.value = number;
 	numberfield.className = 'numberfield';
 	numberfield.id = 'numberOf' + itemName;
-	//numberfield.disabled = "true";
 
 	let plusButton = document.createElement('button');
 	plusButton.className = 'plusButton';
@@ -220,7 +215,7 @@ function setNumberOfDish (numberID, numberValue, dishKey, outputID)
 	{
 		setNumberOfItemsInCart(dishKey, 0);
 		let itemDiv = numberBox.closest('.itemDiv');
-		itemDiv.parentNode.removeChild(itemDiv);
+		removeSingleItemDiv(itemDiv, dishKey);
 	}
 	else
 	{
@@ -230,6 +225,13 @@ function setNumberOfDish (numberID, numberValue, dishKey, outputID)
 		calculateItemPrice(numberID, dishKey, outputID);
 	}
 
+}
+
+function removeSingleItemDiv (itemDiv, dishKey)
+{
+	let priceIndex = priceIdArray.indexOf('price' + dishKey);
+	priceIdArray.splice(priceIndex, 1);
+	itemDiv.parentNode.removeChild(itemDiv);
 }
 
 /**
