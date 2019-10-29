@@ -1,6 +1,8 @@
-/* TODO: Add styling */
+/*
+	The CSS file for Halls Kitchen
+	Made by Group 60 in IT2805 Fall 2019
+ */
 
-/* The body and the html is to be changed*/
 body
 {
 	background-image: url("images/graydon.jpg");
@@ -24,9 +26,8 @@ body
     max-width: 75%;
     font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
-    border-width: 3px;
+	border: 3px solid;
     border-radius: 15px;
-    border-style: solid;
     background-color: rgba(240, 240, 240, 0.9);
 	z-index: 0;
 }
@@ -41,9 +42,8 @@ body
     max-width: 100%;
 	font-size: 22px;
     font-family: Arial, Helvetica, sans-serif;
-    border-width: 3px;
+	border: 3px solid;
     border-radius: 15px;
-    border-style: solid;
     background-color: rgba(240, 240, 240, 0.9);
 	display: flex;
 	flex-direction: row;
@@ -315,8 +315,8 @@ textarea {
 
 .minusButton
 {
-	height: 40px;
-	width: 40px;
+	height: 42px;
+	width: 42px;
 	margin: auto 5px;
 }
 
@@ -330,9 +330,27 @@ textarea {
 
 .plusButton
 {
-	height: 40px;
-	width: 40px;
+	height: 42px;
+	width: 42px;
 	margin: auto 5px;
+}
+
+.totalPrice
+{
+	float: right;
+}
+
+.orderButton
+{
+	position: relative;
+	margin: 20px 0;
+	left: 50%;
+	transform: translate(-50%,0);
+}
+
+.confirmationMessage
+{
+	visibility: hidden;
 }
 
 /*

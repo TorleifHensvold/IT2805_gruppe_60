@@ -6,18 +6,14 @@
 //const menuJSON = getMenu();
 const menuJSON = menuItems;
 const priceIdArray = [];
-console.log(menuJSON);
-console.log(typeof menuJSON);
 
 
 function addCartItemsToHTML ()
 {
-	console.log('Starting addCartItemsToHTML');
 	let storage = localStorage;
 	if (storage.length === 0)
 	{
 		console.log('no cart found');
-		return;
 	}
 	else if (storage['cart'] != null)
 	{
@@ -26,10 +22,8 @@ function addCartItemsToHTML ()
 		for (let thing in JSONcart)
 		{
 			createItemDiv(thing, JSONcart[thing]);
-			//console.log(thing + " : " + JSONcart[thing])
 		}
 	}
-	console.log('addCartItemsToHTML done');
 }
 
 function createItemDiv (itemName, number)
@@ -76,7 +70,6 @@ function createItemDiv (itemName, number)
 	numberfield.value = number;
 	numberfield.className = 'numberfield';
 	numberfield.id = 'numberOf' + itemName;
-	//numberfield.disabled = "true";
 
 	let plusButton = document.createElement('button');
 	plusButton.className = 'plusButton';
@@ -93,13 +86,14 @@ function createItemDiv (itemName, number)
 		Creating the priceDiv which will take into account the number of each
 		item and calculate a price to show.
 	 */
-	let priceText = document.createTextNode('Price:');
+	let priceText = document.createTextNode('Price: ');
 	priceDiv.appendChild(priceText);
 	let priceField = document.createElement('input');
 	priceField.disabled = true;
 	let priceFieldID = 'price' + itemName;
 	priceIdArray.push(priceFieldID);
 	priceField.id = priceFieldID;
+	priceField.value = 0;
 	priceDiv.appendChild(priceField);
 
 	/*
@@ -120,6 +114,13 @@ function createItemDiv (itemName, number)
 		{
 			decrementNumberOfDish(numberfield.id, itemName, priceField.id);
 		});
+	numberfield.addEventListener('change', () =>
+	{
+		setNumberOfDish(numberfield.id, numberfield.value, itemName,
+			priceField.id);
+	});
+	let orderButton = document.getElementById("orderButton");
+	orderButton.addEventListener('click', clearItems);
 
 	/*
 		Choosing where to append the item
@@ -138,7 +139,6 @@ function createItemDiv (itemName, number)
 	{
 		appendChildDiv(itemDiv, 'desserts');
 	}
-	console.log(itemName + ': ' + number);
 	calculateItemPrice(numberfield.id, itemName, priceField.id);
 }
 
@@ -162,6 +162,7 @@ function appendChildDiv (childDiv, parentID)
 function incrementNumberOfDish (numberID, dishKey, outputID)
 {
 	changeNumberOfDish(numberID, '+', dishKey, outputID);
+	addItemsToCart(dishKey, 1);
 }
 
 /**
@@ -173,6 +174,7 @@ function incrementNumberOfDish (numberID, dishKey, outputID)
 function decrementNumberOfDish (numberID, dishKey, outputID)
 {
 	changeNumberOfDish(numberID, '-', dishKey, outputID);
+	removeItemsFromCart(dishKey, 1);
 }
 
 /**
@@ -189,29 +191,56 @@ function changeNumberOfDish (numberID, direction, dishKey, outputID)
 	if (direction === '+')
 	{
 		value++;
+		setNumberOfDish(numberID, value, dishKey, outputID);
 	}
 	else if (direction === '-')
 	{
 		if (value == 1)
 		{
-			let itemDiv = numberBox.closest('.itemDiv');
-			itemDiv.parentNode.removeChild(itemDiv);
-			return;
+			setNumberOfDish(numberID, 0, dishKey, outputID);
 		}
 		else
 		{
 			value--;
+			setNumberOfDish(numberID, value, dishKey, outputID);
 		}
 	}
-	numberBox.value = String(value);
-	calculateItemPrice(numberID, dishKey, outputID);
+
+}
+
+function setNumberOfDish (numberID, numberValue, dishKey, outputID)
+{
+	let numberBox = document.getElementById(numberID);
+	if (numberValue <= 0)
+	{
+		setNumberOfItemsInCart(dishKey, 0);
+		let itemDiv = numberBox.closest('.itemDiv');
+		removeSingleItemDiv(itemDiv, dishKey);
+	}
+	else
+	{
+
+		numberBox.value = String(numberValue);
+		setNumberOfItemsInCart(dishKey, numberValue);
+		calculateItemPrice(numberID, dishKey, outputID);
+	}
+
+}
+
+function removeSingleItemDiv (itemDiv, dishKey)
+{
+	let priceIndex = priceIdArray.indexOf('price' + dishKey);
+	priceIdArray.splice(priceIndex, 1);
+	itemDiv.parentNode.removeChild(itemDiv);
+	calculateTotalPrice()
 }
 
 /**
- * TODO fill out documentation
- * @param numberID
- * @param dishKey
- * @param outputID
+ * Function to calculate the price for each dish based on how many of it there
+ * is
+ * @param numberID the ID of the numberbox we're to change
+ * @param dishKey the key name used in menuItems.js for the item
+ * @param outputID the "input" where we send the final price
  */
 function calculateItemPrice (numberID, dishKey, outputID)
 {
@@ -220,61 +249,74 @@ function calculateItemPrice (numberID, dishKey, outputID)
 	let dish = menuJSON[dishKey];
 	let price = value * dish['price'];
 	document.getElementById(outputID).value = price;
+	calculateTotalPrice()
 }
 
-//DEPRECATED
-function getMenu ()
+function getCartJSON ()
 {
-	let promise = loadScript('scripts/menuItems.js');
-	promise.then(() =>
+	let cartString = localStorage.getItem('cart');
+	let cartJSON = JSON.parse(cartString);
+	return cartJSON;
+}
+
+function addItemsToCart (itemKey, numberToAdd)
+{
+	let cart = getCartJSON();
+	cart[itemKey] += numberToAdd;
+	saveCartJSONtoLocalStorage(cart);
+}
+
+function removeItemsFromCart (itemKey, numberToRemove)
+{
+	let cart = getCartJSON();
+	cart[itemKey] -= numberToRemove;
+	if (cart[itemKey] < 1)
 	{
-		console.log(menuItems);
-		return menuItems;
-	});
-	promise.catch(error => {console.log(error.message);});
-	//promise.then(() => {console.log(menuItems)})
+		delete cart[itemKey];
+	}
+	saveCartJSONtoLocalStorage(cart);
 }
 
-//DEPRECATED
-function getMenuJSONDeprecated ()
+function setNumberOfItemsInCart (itemKey, number)
 {
-	let request = new XMLHttpRequest();
-	request.open('GET', 'JSON_files/menuItems.json', false);
-	request.send(null);
-	let data = request.responseText;
-	/*
-	console.log(data);
-	console.log(typeof data);
-	console.log(typeof JSON.parse(data));
-	console.log(JSON.parse(data));
-	*/
-	return JSON.parse(data);
-}
-
-// DEPRECATED
-/**
- * Uses Promises to allow script execution to be started up again once the
- * requested script has loaded.
- * @param source the relative filepath for the script we want to add and wait
- *     for loading to finish before doing more.
- * @return {Promise<any>} A Promise that will
- */
-function loadScript (source)
-{
-	return new Promise(function (resolve, reject)
+	let cart = getCartJSON();
+	if (number <= 0)
 	{
-		let script = document.createElement('script');
-		script.src = source;
-
-		script.onload = () => resolve(script);
-		script.onerror = () => reject(
-			new Error(`Script load error for ` + source));
-
-		document.head.append(script);
-	});
+		delete cart[itemKey];
+	}
+	else
+	{
+		cart[itemKey] = number;
+	}
+	saveCartJSONtoLocalStorage(cart);
 }
 
+function saveCartJSONtoLocalStorage (cartJSON)
+{
+	localStorage.setItem('cart', JSON.stringify(cartJSON));
+}
+
+function calculateTotalPrice()
+{
+	let price = 0;
+	for (let key of priceIdArray)
+	{
+		price += Number(document.getElementById(key).value);
+	}
+	document.getElementById("totalPrice").value = price;
+}
+
+function clearItems()
+{
+	let cartJSON = getCartJSON();
+	for (item in cartJSON)
+	{
+		setNumberOfDish("numberOf"+item, 0, item, null)
+	}
+	document.getElementById("finishedOrder").style.visibility = "visible";
+}
 
 addCartItemsToHTML();
+
 
 

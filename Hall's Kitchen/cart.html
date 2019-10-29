@@ -24,23 +24,33 @@
 	</noscript>
 </div>
 <div id="content">
+	<div id="finishedOrder" class="confirmationMessage">
+		<h2>Your order is received.</h2>
+	</div>
 	<div id="cartItems" class="cartItems">
 		<div id="appetizers" class="cartItem">
 
 		</div>
-		<div id="dinners" class = "cartItem">
+		<div id="dinners" class="cartItem">
 
 		</div>
-		<div id="desserts">
+		<div id="desserts" class="cartItem">
 
 		</div>
 		<div id="miscellaneous">
 
 		</div>
-
 	</div>
 	<div id="checkout">
+		<div id="totalPriceDiv" class="totalPrice">
+			<label>
+				Total price:
+				<input id="totalPrice" type="number" disabled>
+			</label>
+		</div>
 
+		<br>
+		<button class="orderButton" id="orderButton">Order</button>
 	</div>
 </div>
 </body>
