@@ -68,6 +68,7 @@ function createItemDiv (itemName, number)
 	let description = menuJSON[itemName]['description'].substring(0, 40);
 	p.innerText = description;
 	textfield.appendChild(p);
+
 	let minusButton = document.createElement('button');
 	minusButton.className = 'minusButton';
 	minusButton.innerText = '-';
@@ -77,6 +78,7 @@ function createItemDiv (itemName, number)
 	numberfield.className = 'numberfield';
 	numberfield.id = 'numberOf' + itemName;
 	//numberfield.disabled = "true";
+
 	let plusButton = document.createElement('button');
 	plusButton.className = 'plusButton';
 	plusButton.innerText = '+';
@@ -152,11 +154,20 @@ function incrementNumberOfDish (numberID)
 	changeNumberOfDish(numberID, '+');
 }
 
+/**
+ * Helper function to keep code DRY, and ease overview.
+ * @param numberID the ID of the HTML element containing the number
+ */
 function decrementNumberOfDish (numberID)
 {
 	changeNumberOfDish(numberID, '-');
 }
 
+/**
+ * Helper function to keep code DRY, and ease overview.
+ * @param numberID the ID of the HTML element containing the number
+ * @param direction "+" or "-" for adding or subtracting 1 to/from number
+ */
 function changeNumberOfDish (numberID, direction)
 {
 	let numberBox = document.getElementById(numberID);
@@ -167,6 +178,11 @@ function changeNumberOfDish (numberID, direction)
 	}
 	else if (direction === '-')
 	{
+		if (value === 1)
+		{
+			console.log("We need to delete the element")
+			// TODO: Implement that.
+		}
 		value--;
 	}
 	numberBox.value = String(value);
