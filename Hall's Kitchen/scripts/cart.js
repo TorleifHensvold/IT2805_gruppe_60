@@ -222,57 +222,6 @@ function calculateItemPrice (numberID, dishKey, outputID)
 	document.getElementById(outputID).value = price;
 }
 
-//DEPRECATED
-function getMenu ()
-{
-	let promise = loadScript('scripts/menuItems.js');
-	promise.then(() =>
-	{
-		console.log(menuItems);
-		return menuItems;
-	});
-	promise.catch(error => {console.log(error.message);});
-	//promise.then(() => {console.log(menuItems)})
-}
-
-//DEPRECATED
-function getMenuJSONDeprecated ()
-{
-	let request = new XMLHttpRequest();
-	request.open('GET', 'JSON_files/menuItems.json', false);
-	request.send(null);
-	let data = request.responseText;
-	/*
-	console.log(data);
-	console.log(typeof data);
-	console.log(typeof JSON.parse(data));
-	console.log(JSON.parse(data));
-	*/
-	return JSON.parse(data);
-}
-
-// DEPRECATED
-/**
- * Uses Promises to allow script execution to be started up again once the
- * requested script has loaded.
- * @param source the relative filepath for the script we want to add and wait
- *     for loading to finish before doing more.
- * @return {Promise<any>} A Promise that will
- */
-function loadScript (source)
-{
-	return new Promise(function (resolve, reject)
-	{
-		let script = document.createElement('script');
-		script.src = source;
-
-		script.onload = () => resolve(script);
-		script.onerror = () => reject(
-			new Error(`Script load error for ` + source));
-
-		document.head.append(script);
-	});
-}
 
 
 addCartItemsToHTML();
