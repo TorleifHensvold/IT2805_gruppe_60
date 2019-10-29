@@ -42,7 +42,7 @@ function createItemDiv (itemName, number)
 	let priceDiv = document.createElement('div');
 
 	/*
-		Creating the image div and adding it to the itemDiv.
+		Creating the image div.
 	 */
 	imageDiv.className = 'cartImageDiv';
 	imageDiv.style.backgroundImage = 'url(\'' +
@@ -79,6 +79,7 @@ function createItemDiv (itemName, number)
 	let plusButton = document.createElement('button');
 	plusButton.className = 'plusButton';
 	plusButton.innerText = "+";
+	plusButton.addEventListener("click", () => {incrementNumberOfDish(numberfield.id)});
 	choiceDiv.appendChild(textfield);
 	choiceDiv.appendChild(minusButton);
 	choiceDiv.appendChild(numberfield);
@@ -106,6 +107,9 @@ function createItemDiv (itemName, number)
 	itemDiv.appendChild(priceDiv);
 
 
+	/*
+		Choosing where to append the item
+	 */
 	itemDiv.className = 'itemDiv';
 	let filter = menuJSON[itemName]['type'];
 	if (filter === 'dinner')
@@ -132,6 +136,19 @@ function appendChildDiv (childDiv, parentID)
 {
 	let parentDiv = document.getElementById(parentID);
 	parentDiv.appendChild(childDiv);
+}
+
+/**
+ * Helper function to keep code DRY, and ease overview.
+ * @param numberID the ID of the HTML element containing the number
+ */
+function incrementNumberOfDish (numberID)
+{
+	let numberBox = document.getElementById(numberID);
+	let value = numberBox.value;
+	console.log(value);
+	value++;
+	numberBox.value = String(value);
 }
 
 //DEPRECATED
