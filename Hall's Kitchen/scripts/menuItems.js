@@ -1,7 +1,6 @@
 /*
 	The constant menuItems is an Object, and works as a JSON object
  */
-
 const menuItems =
 	{
 		hamburger: {

@@ -3,6 +3,8 @@
 	Made by Group 60 in IT2805 Fall 2019
  */
 
+/*----------------------------------------------------------------------------------------- */
+/* The following CSS rules are general rules that apply to every site*/
 body
 {
 	background-image: url("images/graydon.jpg");
@@ -16,8 +18,7 @@ body
 	background-color: antiquewhite;
 }
 
-
-/* when changing the body, just put in another div or something then, so we don't lose it*/
+/* General rules for all the content */
 #content {
     margin: auto;
 	padding: 20px;
@@ -33,6 +34,7 @@ body
 }
 
 
+/* Navbar is a flexbox, otherwise it is quite standard */
 #navBar {
 	position: fixed;
 	top: 0;
@@ -60,6 +62,7 @@ body
 	height: 50px;
 }
 
+/* Makes the text smaller and buttons closer when screen gets too small */
 @media only screen and (max-width: 850px) {
 	#navBar a, #navBar button {
 		font-size: 16px;
@@ -92,6 +95,8 @@ button
 	text-align: center;
 }
 
+
+/* Shadow and white transition effect */
 button:hover {
 	animation-name: buttonTransition;
 	animation-duration: 250ms;
@@ -123,8 +128,12 @@ td
 	padding: 5px;
 }
 
+/*----------------------------------------------------------------------------------------- */
 
-/* rules related to menu.html mostly */
+
+
+/*----------------------------------------------------------------------------------------- */
+/* The following rules related to menu.html mostly and windows */
 .menuContainer {
 	display: flex;
 	flex-direction: row;
@@ -190,16 +199,18 @@ td
     background-color: rgba(100, 100, 100, 0.5);
 }
 
+/*----------------------------------------------------------------------------------------- */
 
 
+
+/*----------------------------------------------------------------------------------------- */
+/* The following rules are mostly related to contact_us.html and about_us.html*/
 iframe {
 	margin-top: 50px;
 	width: 100%;
 	height: 400px;
 	border: 0;
 }
-
-
 
 .inquiry_input {
 	width: 70%;
@@ -248,8 +259,11 @@ textarea {
 #alert_div {
 	text-align: center;
 }
+/*----------------------------------------------------------------------------------------- */
 
 
+
+/*----------------------------------------------------------------------------------------- */
 /*
 	The following is mostly used for cart.html and cart.js
 	If you need to use it for something else try to figure out
@@ -356,3 +370,4 @@ textarea {
 /*
 	End of cart.html and cart.js specific styling.
  */
+/*----------------------------------------------------------------------------------------- */
