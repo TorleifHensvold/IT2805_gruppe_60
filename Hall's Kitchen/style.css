@@ -133,7 +133,7 @@ td
 
 
 /*----------------------------------------------------------------------------------------- */
-/* The following rules related to menu.html mostly and windows mostly */
+/* The following rules related to menu.html mostly and windows */
 .menuContainer {
 	display: flex;
 	flex-direction: row;
